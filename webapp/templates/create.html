@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Add new student{% endblock %}
+{% block content %}
+	<div class="header-info-block">
+            <h1>Add new student</h1>
+	</div>
+
+	<div class="task-form">
+		<form action="" method="POST" enctype="multipart/form-data">
+			{% include "student_form.html" with button_text="ADD" %}
+		</form>
+	</div>
+{% endblock %}

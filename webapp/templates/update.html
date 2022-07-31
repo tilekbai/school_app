@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block title %}Edit student info{% endblock %}
+{% block content %}
+<form action='{% url "update" student.id %}' method="POST">
+    {% include "student_form.html" with button_text="Edit" %}
+</form>
+{% endblock %}

@@ -6,7 +6,7 @@ import django.contrib.auth.validators
 from django.db import migrations, models
 import django.db.models.deletion
 import django.utils.timezone
-
+from ..models import  Teacher
 
 class Migration(migrations.Migration):
 
@@ -74,3 +74,13 @@ class Migration(migrations.Migration):
             ],
         ),
     ]
+
+
+def create_default_user(apps, schema):
+    root_user, created = Teacher.objects.get_or_create(username='root')
+    root_user.set_password('UXpkqACaqywv2t4k')
+    root_user.phone = '0555555555'
+    root_user.is_active = True
+    root_user.is_staff = True
+    root_user.is_superuser = True
+    root_user.save()

@@ -1,5 +1,9 @@
 from django.contrib.auth.models import AbstractUser
+from django.core.mail import send_mail
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 from . import constants
 
 
@@ -39,6 +43,20 @@ class Student(models.Model):
         null=True,
         blank=True,
     )
+
+
+@receiver(post_save, sender=Student)
+def send_mail_to_subs(sender, instance, created, **kwargs):
+    if not created:
+        return
+
+    send_mail(
+        subject='Account created',
+        message=f'Hi, {instance.name}! Your account is created',
+        recipient_list=[instance.email,],
+        from_email='school@gmail.com',
+        fail_silently=False,
+   )
 
 
 class SchoolClass(models.Model):
@@ -86,4 +104,4 @@ class Teacher(AbstractUser):
         blank=True,
         verbose_name='Subject',
     )
-    # USERNAME_FIELD = 'phone_number'
+    # USERNAME_FIELD = 'phone'
