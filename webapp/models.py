@@ -104,4 +104,4 @@ class Teacher(AbstractUser):
         blank=True,
         verbose_name='Subject',
     )
-    # USERNAME_FIELD = 'phone'
+    USERNAME_FIELD = 'phone'
